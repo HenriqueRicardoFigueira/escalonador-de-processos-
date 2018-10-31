@@ -5,15 +5,33 @@
 from processo import Processo
 
 class Gerenciador:
-    def __init__(self):
+    def power(self):
         listPro = []
+        eventos = []
+        i = 4
         ref_arquivo = open("processo.txt", "r")
         for linhas in ref_arquivo:
-            valores = linhas.split(" ")
-            pro = Processo(valores[0],valores[1],valores[2],valores[3])
+            valores = linhas.split()
+            id = valores[0]
+            tamanho = valores[1]
+            prioridade = valores[2]
+            tchegada = valores[3]
+
+            if(len(valores) > 4):
+                while(i < len(valores)):
+                    eventos.append(valores[i])
+                    i = i+1
+           
+            pro = Processo(id,tamanho,prioridade,tchegada, eventos)
             listPro.append(pro)
+            print(id,tamanho,prioridade,tchegada,eventos)
+
+            del eventos[:]
+
         ref_arquivo.close()
         
-        print(len(listPro))
+        for pr in listPro:
+            print(pr.id, pr.tamanho, pr.prioridade, pr.tempoChegada, pr.eventos)
         
-Gerenciador().__init__()
+
+Gerenciador().power()
