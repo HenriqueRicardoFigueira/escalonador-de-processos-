@@ -7,10 +7,11 @@ from processo import Processo
 class Gerenciador:
     def power(self):
         listPro = []
-        eventos = []
+        
         i = 4
         ref_arquivo = open("processo.txt", "r")
         for linhas in ref_arquivo:
+            eventos = []
             valores = linhas.split()
             id = valores[0]
             tamanho = valores[1]
@@ -24,14 +25,14 @@ class Gerenciador:
            
             pro = Processo(id,tamanho,prioridade,tchegada, eventos)
             listPro.append(pro)
-            print(id,tamanho,prioridade,tchegada,eventos)
+           
 
-            del eventos[:]
+           #del eventos[:]
 
         ref_arquivo.close()
         
         for pr in listPro:
-            print(pr.id, pr.tamanho, pr.prioridade, pr.tempoChegada, pr.eventos)
+            print(pr.id, pr.tamanho, pr.prioridade, pr.tempoChegada, pr.eventos, pr.tipoPros)
         
 
 Gerenciador().power()
